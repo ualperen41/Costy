@@ -3,6 +3,7 @@ const uiElements = {
   menuBtn: document.querySelector("#menu-btn"),
   nav: document.querySelector("nav"),
   productsList: document.querySelector("#products-list"),
+  carItems:document.querySelector(".cart-items"),
 };
 
 // Api dan alınan ürünler için birer html render eciek fonksiyon
@@ -46,7 +47,7 @@ const renderCartItems = (cart) => {
    const cartItemsHtml = cart.map((item) => `<div class="cart-item">
            
             <img
-              src="https://tse2.mm.bing.net/th?id=OIP.dSqrHEm2JkzhjXItj98veQHaJ3&w=474&h=474&c=7"
+              src="${item.image}"
               alt="cart-item-image"
             />
 
@@ -65,5 +66,9 @@ const renderCartItems = (cart) => {
             
             <button class="remove-button">Remove</button>
           </div> `).join(" ");
+          // Oluşturulan carHtml i arayüze ekle
+uiElements.cartItems.innerHTML =cartItemsHtml;
+          console.log(cartItemsHtml);
 }
+
 export { uiElements, renderProduct,renderCartItems };

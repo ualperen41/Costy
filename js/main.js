@@ -25,9 +25,9 @@ let cart = getFromLocale("cart");
 // sepette ürün yoksa not-found içeriğini renderla,sepette ürünler varsa bu ürünleri renderla
  if ( cart.length > 0) {
  renderCartItems(cart);
- console.log(cart)
+ 
  } else {
-  console.log(`Sepette elemanlar bulunmamakta`);
+renderNotFound();
  }
   }
 });
