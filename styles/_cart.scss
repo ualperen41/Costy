@@ -1,117 +1,116 @@
 @use "./variables";
 
 .cart-container {
-   margin-top: 50px !important;
+  margin-top: 50px !important;
 
-   // Back to home button
-.back-to-home-button {
-display: block;
-margin: 20px 10px;
-display: flex;
-align-items: center;
-gap: 5px;
-color: variables.$text-color;
-font-size: 20px;
-font-weight: bold;
-}
-   // Title
-.cart-title  {
+  // Back to home button
+  .back-to-home-button {
+    display: block;
+    margin: 20px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: variables.$text-color;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  // Title
+  .cart-title {
     margin: 30px 10px;
     font-size: 45px;
-}
-   // Cart Wrapper
-.cart-wrapper {
+  }
+  // Cart Wrapper
+  .cart-wrapper {
     display: grid;
     grid-template-columns: 4fr 1fr;
     gap: 20px;
 
     // Cart Items
-.cart-items {
-    //Cart Item
-    .cart-item {
+    .cart-items {
+      //Cart Item
+      .cart-item {
         display: grid;
         grid-template-columns: 0.5fr 1fr 0.5fr 0.5fr;
         align-items: center;
         padding: 10px 15px;
-        border-bottom: 1px solid rgb(227,227,227);
+        border-bottom: 1px solid rgb(227, 227, 227);
 
         // Image
         img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
         }
 
         // Product Info
         &-info {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
 
-            //Product Title
-            .cart-item-title {
-                font-size: 20px;
-                font-weight: 400;
-            }
+          //Product Title
+          .cart-item-title {
+            font-size: 20px;
+            font-weight: 400;
+          }
 
-            // Product Quantity
-            .cart-item-quantity {
-                border: 1px solid variables.$text-color;
-                width: 40px;
-                text-align: center;
-                font-size: 18px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
+          // Product Quantity
+          .cart-item-quantity {
+            border: 1px solid variables.$text-color;
+            width: 40px;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+          }
         }
         // Price
         .cart-item-price {
-            font-size: 20px;
-            font-weight: 500;
+          font-size: 20px;
+          font-weight: 500;
         }
 
         // Remove Button
         .remove-button {
-            background-color: crimson;
-            color: variables.$bg-color;
-            padding: 8px;
-            max-width: 100px;
-            font-weight: 600;
-            cursor: pointer;
+          background-color: crimson;
+          color: variables.$bg-color;
+          padding: 8px;
+          max-width: 100px;
+          font-weight: 600;
+          cursor: pointer;
         }
+      }
     }
-}
     // Checkbox
     .cart-checkbox {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-        //Total price
-        h2 {
-            font-size: 32px;
-            white-space: nowrap;
-            font-weight: 600;
-        }
+      //Total price
+      h2 {
+        font-size: 32px;
+        white-space: nowrap;
+        font-weight: 600;
+      }
 
-        // Checkout Btn
-        .checkout-btn {
-            background-color: variables.$main-color;
-            color: variables.$bg-color;
-            padding: 10px;
-            font-size: 17px;
-            border-radius: 5px;
-            max-width: 150px;
-            cursor: pointer;
-        }
+      // Checkout Btn
+      .checkout-btn {
+        background-color: variables.$main-color;
+        color: variables.$bg-color;
+        padding: 10px;
+        font-size: 17px;
+        border-radius: 5px;
+        max-width: 150px;
+        cursor: pointer;
+      }
 
-         // Fee Title
-         .fee-title {
-            font-size: 20px;
-            font-weight: bold;
-            white-space: nowrap;
-         }
+      // Fee Title
+      .fee-title {
+        font-size: 20px;
+        font-weight: bold;
+        white-space: nowrap;
+      }
     }
-}
-
+  }
 }

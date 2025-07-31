@@ -39,4 +39,31 @@ const renderProduct = (products, callBackFunction) => {
     button.addEventListener("click", callBackFunction);
   });
 };
-export { uiElements, renderProduct };
+const renderCartItems = (cart) => {
+  // Bu fonksiyondan beklentimiz sepetteki her bir eleman için bir html oluşturması ve bunu arayüze eklemesi
+// Bu fonksiyona dışarıdan verilen cart dizisi içerisinde yer alan her bir eleman için bir html oluştur
+
+   const cartItemsHtml = cart.map((item) => `<div class="cart-item">
+           
+            <img
+              src="https://tse2.mm.bing.net/th?id=OIP.dSqrHEm2JkzhjXItj98veQHaJ3&w=474&h=474&c=7"
+              alt="cart-item-image"
+            />
+
+            
+            <div class="cart-item-info">
+              <h2 class="cart-item-title">Chestnut Brown</h2>
+              <input
+                type="number"
+                min="1"
+                value="1"
+                class="cart-item-quantity"
+              />
+            </div>
+           
+            <h3 class="cart-item-price">$74.9</h3>
+            
+            <button class="remove-button">Remove</button>
+          </div> `).join(" ");
+}
+export { uiElements, renderProduct,renderCartItems };

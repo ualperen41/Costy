@@ -55,7 +55,7 @@ header .container #basket-btn:after {
   font-weight: bold;
 }
 
-@media (max-wdith: 800px) {
+@media (max-width: 800px) {
   .hero h1 {
     font-size: 80px !important;
     top: 40px !important;

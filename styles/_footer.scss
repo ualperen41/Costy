@@ -20,40 +20,39 @@ footer {
       text-transform: uppercase;
     }
     .social {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        a {
-            background-color: variables.$bg-color;
-            padding: 10px;
-            font-size: 17px;
-            border-radius: 50%;
-            i {
-                color: variables.$main-color;
-            }
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      a {
+        background-color: variables.$bg-color;
+        padding: 10px;
+        font-size: 17px;
+        border-radius: 50%;
+        i {
+          color: variables.$main-color;
         }
+      }
     }
     h3 {
-       font-size: 35px;
+      font-size: 35px;
     }
 
     ul {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
 
-        li {
-            a {
-                color: variables.$bg-color;
-                font-size: 17px;
-            }
+      li {
+        a {
+          color: variables.$bg-color;
+          font-size: 17px;
         }
+      }
     }
   }
   .copyright {
     padding: 50px;
     font-size: 20px;
   }
-
 }
