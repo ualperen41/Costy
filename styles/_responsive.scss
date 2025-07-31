@@ -14,6 +14,16 @@
         }
     }
   }
+  // Footer
+  .footer-c {
+    grid-template-columns: 1fr !important;
+    row-gap: 40px;
+  }
+
+ .cart-wrapper {
+  grid-template-columns: 1fr !important;
+  padding: 20px;
+ }
 }
 
 @media (max-width: 600px) {
