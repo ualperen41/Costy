@@ -1,9 +1,11 @@
+import { onQuantityChange, removeFromCart } from "./cart.js";
+
 // Ui elemanlarını bir arada tutan obje
 const uiElements = {
   menuBtn: document.querySelector("#menu-btn"),
   nav: document.querySelector("nav"),
   productsList: document.querySelector("#products-list"),
-  carItems:document.querySelector(".cart-items"),
+  cartItems: document.querySelector(".cart-items"),
 };
 
 // Api dan alınan ürünler için birer html render eciek fonksiyon
@@ -16,13 +18,15 @@ const renderProduct = (products, callBackFunction) => {
           
              <img
             src="${product.image}"
-            alt="product-image"
+            alt="${product.title}"
           />
            
             <div class="product-info">
               <h2>${product.title} </h2>
               <p>$${product.price.toFixed(2)}</p>
-              <button class="add-to-cart" data-id="${product.id}">Add to cart</button>
+              <button class="add-to-cart" data-id="${
+                product.id
+              }">Add to cart</button>
             </div>
          </div>`
     )
@@ -42,9 +46,11 @@ const renderProduct = (products, callBackFunction) => {
 };
 const renderCartItems = (cart) => {
   // Bu fonksiyondan beklentimiz sepetteki her bir eleman için bir html oluşturması ve bunu arayüze eklemesi
-// Bu fonksiyona dışarıdan verilen cart dizisi içerisinde yer alan her bir eleman için bir html oluştur
+  // Bu fonksiyona dışarıdan verilen cart dizisi içerisinde yer alan her bir eleman için bir html oluştur
 
-   const cartItemsHtml = cart.map((item) => `<div class="cart-item">
+  const cartItemsHtml = cart
+    .map(
+      (item) => `<div class="cart-item">
            
             <img
               src="${item.image}"
@@ -53,22 +59,55 @@ const renderCartItems = (cart) => {
 
             
             <div class="cart-item-info">
-              <h2 class="cart-item-title">Chestnut Brown</h2>
+              <h2 class="cart-item-title">${item.title}</h2>
               <input
                 type="number"
                 min="1"
-                value="1"
+                value="${item.quantity}"
                 class="cart-item-quantity"
+                data-id='${item.id}'
               />
             </div>
            
-            <h3 class="cart-item-price">$74.9</h3>
+            <h3 class="cart-item-price">$${item.price.toFixed(2)}</h3>
             
-            <button class="remove-button">Remove</button>
-          </div> `).join(" ");
-          // Oluşturulan carHtml i arayüze ekle
-uiElements.cartItems.innerHTML =cartItemsHtml;
-          console.log(cartItemsHtml);
-}
+            <button class="remove-button" data-id='${item.id}'>Remove</button>
+          </div> `
+    )
+    .join(" ");
+  // Oluşturulan carHtml i arayüze ekle
+  uiElements.cartItems.innerHTML = cartItemsHtml;
 
-export { uiElements, renderProduct,renderCartItems };
+
+  // remove-button class sahip elemanlara eriş
+  const removeButtons = document.querySelectorAll(".remove-button");
+
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      removeFromCart(e);
+    });
+  });
+  // cart-item-quantity class'ına sahip elemanlara eriş
+   const quantityInputs = document.querySelectorAll(".cart-item-quantity");
+
+ // quantityInputs içerisindeki herbir input'a eriş
+ quantityInputs.forEach((input) => {
+   // Erişilen inputlara bir olay izleyicisi ekle
+   input.addEventListener("change", (e) => {
+   onQuantityChange(e);
+   });
+ });
+};
+
+const renderNotFound = () => {
+  uiElements.cartItems.innerHTML = `<div class="cookieCard">
+  <h1 class="cookieHeading">No items found in cart</h1>
+  <p class="cookieDescription">Go to home page to add items to your cart</p>
+  <div>
+  <a href='../index.html' class="acceptButton">Go to home page</a>
+  </div>
+</div>
+`;
+};
+
+export { uiElements, renderProduct, renderCartItems, renderNotFound };

@@ -1,4 +1,5 @@
 import { getFromLocale, saveToLocale } from "./helpers.js";
+import { renderCartItems, renderNotFound } from "./ui.js";
 
 // LocaleStorage'dan sepete eklenen ürünleri al
  let cart = getFromLocale("cart");
@@ -45,6 +46,48 @@ saveToLocale("cart",cart);
  }, 2000);
 };
 
+// Sepetten eleman kaldırıcak fonksiyon
+const removeFromCart = (e) => {
+
+    //Kulalnıcıdan silme işlemi için onay al
+   const response= confirm("Do you confirm to delete this product?")
+
+// Eğer kullanıcı silme işlemini onayladıysa
+if (response) {
+  // Tıklanılan elemana eriş
+  const productId = Number(e.target.dataset.id);
+
+  //Id si bilinen ürünü sepetten kaldır
+  cart = cart.filter((item) => item.id !== productId);
+
+// güncel sepete göre localStorage'ı güncelle
+ saveToLocale("cart",cart);
+
+   // Güncellenen sepet'e göre arayüzü renderla.Eğer sepette eleman varsa sepetteki elemanları renderla ama sepette eleman yoksa not found içeriğini renderla
+   if(cart.length>0) {
+renderCartItems(cart);
+   } else {
+    renderNotFound();
+   }
 
 
-export {addToCart};
+  console.log(cart);
+
+
+
+  console.log(productId);
+}
+
+   
+  
+  
+};
+
+// Sepetteki ürünün miktarını güncelleyen fonksiyon
+const onQuantityChange = () => {
+  // * Bu fonksiyondan beklentimiz miktarı değişen ürünü bulması ve değişen miktarı ilgili ürünün yeni miktarı olarak belirlemesidir.
+
+  console.log(`input değeri değişti`)
+}
+
+export {addToCart,removeFromCart,onQuantityChange};

@@ -1,7 +1,7 @@
 import fetchProducts from "./api.js";
 import { addToCart } from "./cart.js";
 import { getFromLocale } from "./helpers.js";
-import { renderCartItems, renderProduct, uiElements } from "./ui.js";
+import { renderCartItems, renderNotFound, renderProduct, uiElements } from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // menuBtn'e tıklanınca nav kısmını aç-kapa yap
