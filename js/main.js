@@ -1,7 +1,13 @@
 import fetchProducts from "./api.js";
 import { addToCart } from "./cart.js";
 import { getFromLocale } from "./helpers.js";
-import { renderCartItems,renderCartQuantity,renderNotFound, renderProduct, uiElements } from "./ui.js";
+import {
+  renderCartItems,
+  renderCartQuantity,
+  renderNotFound,
+  renderProduct,
+  uiElements,
+} from "./ui.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   // menuBtn'e tıklanınca nav kısmını aç-kapa yap
@@ -10,10 +16,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     uiElements.nav.classList.toggle("open");
   });
 
-// LocalStorage dan sepete eklenen ürünleri al
-let cart = getFromLocale("cart");
+  // LocalStorage dan sepete eklenen ürünleri al
+  let cart = getFromLocale("cart");
 
-// * Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
+  // * Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
   renderCartQuantity(cart);
 
   // Hangi sayfadayız? Eğer ana sayfadaysak api'dan ürünleri al ve arayüzde render et; eğer sepet sayfasındaysak bu durumdada sepete eklenen ürünleri render et
@@ -25,15 +31,16 @@ let cart = getFromLocale("cart");
 
     // Alınan ürünleri render etme
     renderProduct(products, (e) => {
-      addToCart(e,products);
+      addToCart(e, products);
     });
   } else {
-// sepette ürün yoksa not-found içeriğini renderla,sepette ürünler varsa bu ürünleri renderla
- if ( cart.length > 0) {
- renderCartItems(cart);
- 
- } else {
-renderNotFound();
- }
+    // sepette ürün yoksa not-found içeriğini renderla,sepette ürünler varsa bu ürünleri renderla
+    if (cart.length > 0) {
+      renderCartItems(cart);
+
+     
+    } else {
+      renderNotFound();
+    }
   }
 });

@@ -1,5 +1,5 @@
 import { onQuantityChange, removeFromCart } from "./cart.js";
-import { calculateTotalQuantity } from "./helpers.js";
+import { calculateTotalPrice, calculateTotalQuantity } from "./helpers.js";
 
 // Ui elemanlarını bir arada tutan obje
 const uiElements = {
@@ -7,7 +7,8 @@ const uiElements = {
   nav: document.querySelector("nav"),
   productsList: document.querySelector("#products-list"),
   cartItems: document.querySelector(".cart-items"),
-  cartQuantity:document.querySelector("#basket-btn"),
+  cartQuantity: document.querySelector("#basket-btn"),
+  totalAmount: document.querySelector(".cart-total"),
 };
 
 // Api dan alınan ürünler için birer html render eciek fonksiyon
@@ -80,7 +81,6 @@ const renderCartItems = (cart) => {
   // Oluşturulan carHtml i arayüze ekle
   uiElements.cartItems.innerHTML = cartItemsHtml;
 
-
   // remove-button class sahip elemanlara eriş
   const removeButtons = document.querySelectorAll(".remove-button");
 
@@ -90,16 +90,15 @@ const renderCartItems = (cart) => {
     });
   });
   // cart-item-quantity class'ına sahip elemanlara eriş
-   const quantityInputs = document.querySelectorAll(".cart-item-quantity");
+  const quantityInputs = document.querySelectorAll(".cart-item-quantity");
 
- // quantityInputs içerisindeki herbir input'a eriş
- quantityInputs.forEach((input) => {
-   // Erişilen inputlara bir olay izleyicisi ekle
-   input.addEventListener("change", (e) => {
-    onQuantityChange(e);
-     
-   });
- });
+  // quantityInputs içerisindeki herbir input'a eriş
+  quantityInputs.forEach((input) => {
+    // Erişilen inputlara bir olay izleyicisi ekle
+    input.addEventListener("change", (e) => {
+      onQuantityChange(e);
+    });
+  });
 };
 
 const renderNotFound = () => {
@@ -115,13 +114,24 @@ const renderNotFound = () => {
 
 // Sepetteki ürün sayısına göre sepet ikonunu güncelleyen fonksiyon
 const renderCartQuantity = (cart) => {
-   // * Bu fonksiyondan beklentimiz sepetteki ürün sayısına göre header içerisindeki sepet ikonunun değerini dinamik şekilde güncelleyecek.
+  // * Bu fonksiyondan beklentimiz sepetteki ürün sayısına göre header içerisindeki sepet ikonunun değerini dinamik şekilde güncelleyecek.
   // Dışarıdan verilen sepet dizisini parametre olarak aldıktan sonra toplam ürün miktarını hesapla
-const totalQuantity = calculateTotalQuantity(cart);
+  const totalQuantity = calculateTotalQuantity(cart);
 
-// uiElements içerisindeki cartQuantity elemanına bir attribute ata
-uiElements.cartQuantity.setAttribute("data-quantity",totalQuantity);
-
+  // uiElements içerisindeki cartQuantity elemanına bir attribute ata
+  uiElements.cartQuantity.setAttribute("data-quantity", totalQuantity);
+};
+const renderCartTotal = (cart) => {
+  const totalCartAmount = calculateTotalPrice(cart);
+  // calculateTotalPrice fonksiyonu ile hesaplanan toplam sepet ödemesinin dinamik olarak renderlaması
+  uiElements.totalAmount.innerText = ` $ ${totalCartAmount.toFixed(2)}`;
 };
 
-export { uiElements, renderProduct, renderCartItems, renderNotFound, renderCartQuantity };
+export {
+  uiElements,
+  renderProduct,
+  renderCartItems,
+  renderNotFound,
+  renderCartQuantity,
+  renderCartTotal,
+};

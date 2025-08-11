@@ -1,5 +1,5 @@
-import { calculateTotalPrice, getFromLocale, saveToLocale,calculateTotalQuantity } from "./helpers.js";
-import { renderCartItems, renderCartQuantity,   renderNotFound } from "./ui.js";
+import { getFromLocale, saveToLocale, } from "./helpers.js";
+import {renderCartItems, renderNotFound, renderCartQuantity, renderCartTotal  } from "./ui.js";
 
 // LocaleStorage'dan sepete eklenen ürünleri al
 let cart = getFromLocale("cart");
@@ -63,7 +63,8 @@ const removeFromCart = (e) => {
 
     // güncel sepete göre localStorage'ı güncelle
     saveToLocale("cart", cart);
-
+ // Sepetteki ürünlerin toplam fiyatını renderla
+    renderCartTotal(cart);
     // Güncellenen sepet'e göre arayüzü renderla.Eğer sepette eleman varsa sepetteki elemanları renderla ama sepette eleman yoksa not found içeriğini renderla
     if (cart.length > 0) {
       renderCartItems(cart);
@@ -71,11 +72,11 @@ const removeFromCart = (e) => {
       renderNotFound();
     }
 
-   //  Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
-renderCartQuantity(cart);
-  }
+  
 };
-
+ //  Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
+renderCartQuantity(cart);
+  };
 const onQuantityChange = (e) => {
    // * Bu fonksiyondan beklentimiz miktarı değişen ürünü bulması ve değişen miktarı ilgili ürünün yeni miktarı olarak belirlemesidir.
 
@@ -95,7 +96,7 @@ const productId = parseInt(e.target.dataset.id)
  // Güncel sepet dizisini localStorage'a aktar
  saveToLocale("cart",cart);
   // Sepetteki ürünlerin toplam fiyatını renderla
-   renderCartTotal(cart);
+    renderCartTotal(cart);
 //  Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
 renderCartQuantity(cart);
 
@@ -111,4 +112,4 @@ renderCartQuantity(cart);
 
 }
 export { addToCart, removeFromCart, onQuantityChange };
-calculateTotalPrice(cart);
+
