@@ -1,5 +1,5 @@
-import { getFromLocale, saveToLocale,} from "./helpers.js";
-import { renderCartItems, renderCartQuantity, renderNotFound } from "./ui.js";
+import { calculateTotalPrice, getFromLocale, saveToLocale,calculateTotalQuantity } from "./helpers.js";
+import { renderCartItems, renderCartQuantity,   renderNotFound } from "./ui.js";
 
 // LocaleStorage'dan sepete eklenen ürünleri al
 let cart = getFromLocale("cart");
@@ -42,10 +42,11 @@ const addToCart = (e, products) => {
   setTimeout(() => {
     e.target.textContent = "Add to cart";
   }, 2000);
+  //  Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
+renderCartQuantity(cart);
 };
 
-//  Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
-renderCartQuantity(cart);
+
 
 // Sepetten eleman kaldırıcak fonksiyon
 const removeFromCart = (e) => {
@@ -70,9 +71,8 @@ const removeFromCart = (e) => {
       renderNotFound();
     }
 
-    console.log(cart);
-
-    console.log(productId);
+   //  Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
+renderCartQuantity(cart);
   }
 };
 
@@ -94,9 +94,12 @@ const productId = parseInt(e.target.dataset.id)
 
  // Güncel sepet dizisini localStorage'a aktar
  saveToLocale("cart",cart);
-
   // Sepetteki ürünlerin toplam fiyatını renderla
-  // renderCartTotal(cart);
+   renderCartTotal(cart);
+//  Header içerisindeki sepet ikonunun yanındaki miktar değerini güncelle
+renderCartQuantity(cart);
+
+
   } else {
  // Eğer yeni miktar 0'dan büyük değilse kullanıcıya bir uyarıda bulun
  alert("Plase enter a value grater than 0");
@@ -104,6 +107,8 @@ const productId = parseInt(e.target.dataset.id)
  // Fonksiyonu durdur
  return;
   }
+  
+
 }
 export { addToCart, removeFromCart, onQuantityChange };
-
+calculateTotalPrice(cart);

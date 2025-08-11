@@ -1,3 +1,4 @@
+
 // LocalStorage'a kayıt yapacak fonksiyon
 const saveToLocale = (key, data) => {
   // Dışarıdan verilen key değerine karşılık yine dışarıdan verilen data değerini JSON.stringify ile dönüştürüp kayıt et
@@ -30,5 +31,28 @@ const getFromLocale = (key) => {
    // Hesaplanan toplam ürün miktarını fonksiyon dışarısına çıkar
    return totalQuantity;
 
- }
-export { saveToLocale, getFromLocale, calculateTotalQuantity};
+ };
+
+ // Sepetteki ürünlerin toplam fiyatını hesaplayacak fonksiyon
+ 
+  const calculateTotalPrice = (cart) => {
+// Bu fonksiyondan beklentimiz sepetteki tüm ürünlerin toplam fiyatını hesaplaması ve eğer toplam fiyat 500$ altında ise 100$'lık kargo ücreti alsın ama 500$'ın üzerinde ise kargo ücreti almasın.
+
+  // sepetteki tüm ürünlerin toplam fiyatını hesapla
+  const cartItemsAmount = cart.reduce((total, product) => total + product.quantity * product.price,0);
+
+  // Sepet toplamı için bir değişken oluştur
+  let totalAmount;
+  // Eğer sepetteki ürünlerin toplam fiyatı 500$'ın altındaysa 100$ kargo ücreti al;değilse kargo ücreti alma
+  if (cartItemsAmount < 500) {
+    // Kargo ücreti ekle
+    totalAmount = cartItemsAmount + 100;
+  } else {
+    // Kargo ücreti alma
+    totalAmount = cartItemsAmount;
+  }
+  // Hesaplanan toplam fiyatı return et
+  return totalAmount;
+  }
+
+export { saveToLocale, getFromLocale, calculateTotalQuantity,calculateTotalPrice};
