@@ -4,6 +4,7 @@ import { getFromLocale } from "./helpers.js";
 import {
   renderCartItems,
   renderCartQuantity,
+  renderCartTotal,
   renderNotFound,
   renderProduct,
   uiElements,
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (cart.length > 0) {
       renderCartItems(cart);
 
-     
+     renderCartTotal(cart);
     } else {
       renderNotFound();
     }
